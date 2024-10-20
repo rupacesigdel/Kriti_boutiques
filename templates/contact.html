@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block contactactive %}active{% endblock contactactive %}
+{% block css %}
+<style>
+  .container{
+    min-height: 200vh;
+  }
+</style>
+{% endblock css %}
+{% block body %} 
+<div class="container">  
+  <h2 class="py-3">Contact us </h2>
+  <form action="/contact/" method="POST">
+    {% csrf_token %}
+    <div class="from-group">
+      <label for="name" class="visually">Full Name</label>
+      <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name">
+    </div>
+    <div class="from-group">
+      <label for="phone" class="visually">Contact number</label>
+      <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter your contact no.">
+    </div>
+    <div class="col-auto">
+      <label for="email" class="visually">Email</label>
+      <input type="text" class="form-control" id="email" name="email" placeholder="email@example.com">
+      <small id="EmailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+    <div class="from-group">
+      <label for="desc" class="visually">Help desk</label>
+      <textarea type="text" class="form-control" id="desc" name="desc" placeholder="what can i help you"></textarea>
+    </div>
+
+    <div class="col-auto my-3">
+      <button type="submit" class="btn btn-primary mb-3">submit
+      </button>
+    </div>
+  </form>
+</div>   
+
+{% endblock body %}
