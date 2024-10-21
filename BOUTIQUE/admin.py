@@ -1,6 +1,7 @@
 from django.contrib import admin
 from BOUTIQUE.models import Boutique, Contact
 from django.contrib.admin import AdminSite
+from .models import Order
 
 class BoutiqueAdmin(admin.ModelAdmin):
     class Media:
@@ -9,6 +10,13 @@ class BoutiqueAdmin(admin.ModelAdmin):
         }
 
         js = ("js/blog.js",)
+
+class OrderAdmin(admin.ModelAdmin):
+    list_display = ('sno', 'name', 'email', 'phone', 'product', 'quantity', 'order_date')
+    search_fields = ('name', 'email', 'product')
+
+admin.site.register(Order, OrderAdmin)
+
 
 
 class MyAdminSite(AdminSite):

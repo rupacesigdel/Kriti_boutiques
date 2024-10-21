@@ -28,12 +28,20 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
                 <a class="nav-link {% block homeactive %}{% endblock homeactive %}" 
-                   href="{% url 'home' %}">Home</a>
+                   href="{% url 'home' %}">Dresses</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link {% block designactive %}{% endblock designactive %}" 
                    href="{% url 'boutique' %}">Design</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link {% block orderactive %}{% endblock orderactive %}" 
+                   href="{% url 'order' %}">Order</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link {% block new_arrivalsactive %}{% endblock new_arrivalsactive %}" 
+                   href="{% url 'new_arrivals' %}">New Arrivals</a>
+              </li>              
               <li class="nav-item">
                 <a class="nav-link {% block contactactive %}{% endblock contactactive %}" 
                    href="{% url 'contact' %}">Contact</a>

@@ -1,11 +1,11 @@
 {% extends "base.html" %}
-{% block body %}    
-<h1>Search Results</h1>
+{% block body %}
+<h1>Search Results for "{{ request.GET.q }}"</h1>
 <ul>
     {% for result in results %}
-        <li>{{ result.Boutique }}: {{ result.desc }}</li>
+        <li>{{ result.title }}: {{ result.short_desc }}</li>
     {% empty %}
-        <li>No results found.</li>
+        <li>No results found for "{{ request.GET.q }}".</li>
     {% endfor %}
 </ul>
 {% endblock body %}

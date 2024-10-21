@@ -7,4 +7,8 @@ urlpatterns = [
     path('search/', views.search, name='search'),
     path('boutique_post/<str:slug>/', views.boutique_post, name='boutique_post'),
     path('contact/', views.contact, name='contact'),
+    path('order/', views.order_view, name='order'),
+    path('new_arrivals/', views.new_arrivals_view, name='new_arrivals'),
+    path('product_detail/<int:id>/', views.product_detail, name='product_detail'),
+    path('submit_order/', views.submit_order, name='submit_order'),
 ]

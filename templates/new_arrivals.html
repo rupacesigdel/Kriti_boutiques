@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block new_arrivalsactive %}active{% endblock new_arrivalsactive %}
+
+{% block css %}{% endblock css %}
+
+{% load static %}
+
+{% block body %}
+<div class="container my-5">
+    <h2 class="text-center mb-4">New Arrivals</h2>
+    <div class="row">
+        {% for product in new_arrivals %}
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.title }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.title }}</h5>
+                    <p class="card-text">{{ product.short_desc }}</p>
+                    <p class="text-muted">Price: ₹{{ product.price }}</p>
+                    <a href="{% url 'product_detail' product.sno %}" class="btn btn-dark w-100">View Details</a>
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        <p class="text-center">No new arrivals available at the moment. Check back soon!</p>
+    {% endfor %}    
+    </div>
+</div>
+{% endblock body %}
