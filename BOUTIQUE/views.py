@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from BOUTIQUE.models import Boutique, Contact
 import math
-from django.urls import reverse
 from .models import Boutique
 from django.contrib import messages
 from .models import Order  
+from .models import Product
+
 
 def home(request):
     return render(request, 'index.html')
@@ -32,32 +33,36 @@ def boutique_post(request, slug):
     return render(request, 'boutique_post.html', context)
 
 def order_view(request):
-    if request.method == 'POST':
-        return redirect(reverse('home')) 
-    return render(request, 'order.html')
+    products = Product.objects.all()
+    return render(request, 'order.html', {'products': products})
 
 
 def submit_order(request):
     if request.method == 'POST':
         name = request.POST.get('name')
         email = request.POST.get('email')
-        phone = request.POST.get('phone')  # Retrieve phone number
+        phone = request.POST.get('phone')
         address = request.POST.get('address')
-        product = request.POST.get('product')
+        product_id = request.POST.get('product_id')
         quantity = request.POST.get('quantity')
 
-        Order.objects.create(
-            name=name,
-            email=email,
-            phone=phone,
-            address=address,
-            product=product,
-            quantity=quantity
-        )
+        if product_id:
+            product = get_object_or_404(Product, id=product_id)
 
-        messages.success(request, 'Your order has been placed successfully!')
-        return redirect('order')
-    return render(request, 'order.html')
+            order = Order.objects.create(
+                product=product,
+                name=name,
+                email=email,
+                phone=phone,
+                address=address,
+                quantity=quantity
+            )
+
+            return redirect('order_success')
+        else:
+            return redirect('order')
+
+    return redirect('order')
 
 
 def new_arrivals_view(request):

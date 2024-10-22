@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block homeactive %}active{% endblock homeactive %}
 {% load static %}
+
 {% block css %}
 <style>
   .carousel-item img {
@@ -9,18 +10,19 @@
   }
 </style>
 {% endblock css %}
+
 {% block body %}
 <div class="container-fluid d-flex justify-content-center align-items-center vh-20">
   <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2000">
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img src="{% static 'BOUTIQUE\images\pic3.jpg' %}" alt="BLOUSE" style="width: 100%vw;">
+        <img src="{% static 'BOUTIQUE/images/pic3.jpg' %}" alt="BLOUSE" style="width: 100%;">
       </div>
       <div class="carousel-item">
-        <img src="{% static 'BOUTIQUE/images/7.jpg' %}" alt="BLOUSE" style="width: 100%vw;">
+        <img src="{% static 'BOUTIQUE/images/7.jpg' %}" alt="BLOUSE" style="width: 100%;">
       </div>
       <div class="carousel-item">
-        <img src="{% static 'BOUTIQUE/images/10.jpg' %}" alt="BLOUSE" style="width: 100%vw;">
+        <img src="{% static 'BOUTIQUE/images/10.jpg' %}" alt="BLOUSE" style="width: 100%;">
       </div>
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
@@ -38,39 +40,99 @@
   <h2 class="text-center my-3" style="color: #FF5733;">!!!Welcome to Kriti Boutique!!!</h2>
   <div class="row">
     <div class="col-md-4 text-center">
-      <img src="{% static 'BOUTIQUE/images/pic1.jpg' %}" alt="BLOUSE" style="width: 300px;">
+      <img src="{% static 'BOUTIQUE/images/pic1.jpg' %}" alt="Gawn" style="width: 100%;">
       <div class="my-4">
         <h5>Gawn</h5>
       </div>
     </div>
     <div class="col-md-4 text-center">
-      <img src="{% static 'BOUTIQUE/images/pic2.jpg' %}" alt="BLOUSE" style="width: 300px;">
+      <img src="{% static 'BOUTIQUE/images/pic2.jpg' %}" alt="Saree" style="width: 100%;">
       <div class="my-4">
         <h5>Saree</h5>
       </div>
     </div>
     <div class="col-md-4 text-center">
-      <img src="{% static 'BOUTIQUE/images/pic4.jpg' %}" alt="BLOUSE" style="width: 300px;">
+      <img src="{% static 'BOUTIQUE/images/pic4.jpg' %}" alt="Lehenga" style="width: 100%;">
       <div class="my-4">
         <h5>Lehenga</h5>
       </div>
     </div>
     <div class="col-md-4 text-center">
-      <img src="{% static 'BOUTIQUE/images/pic5.jpg' %}" alt="BLOUSE" style="width: 300px;">
+      <img src="{% static 'BOUTIQUE/images/pic5.jpg' %}" alt="Blouse" style="width: 100%;">
       <div class="my-4">
         <h5>Blouse</h5>
       </div>
     </div>
     <div class="col-md-4 text-center">
-      <img src="{% static 'BOUTIQUE/images/pic9.jpg' %}" alt="BLOUSE" style="width: 300px;">
+      <img src="{% static 'BOUTIQUE/images/img1.webp' %}" alt="Image" style="width: 100%;">
       <div class="my-4">
-        <h5>Blouse readymade</h5>
+        <h5>Blouse</h5> <!-- Optional title -->
       </div>
     </div>
     <div class="col-md-4 text-center">
-      <img src="{% static 'BOUTIQUE/images/pic6.jpg' %}" alt="BLOUSE" style="width: 300px;">
+      <img src="{% static 'BOUTIQUE/images/leg3.jpg' %}" alt="Image" style="width: 100%;">
       <div class="my-4">
-        <h5>One-piece</h5>
+        <h5>Lehenga</h5> <!-- Optional title -->
+      </div>
+    </div>
+    <div class="col-md-4 text-center">
+      <img src="{% static 'BOUTIQUE/images/leg2.jpg' %}" alt="Image" style="width: 100%;">
+      <div class="my-4">
+        <h5> Lehenga</h5> <!-- Optional title -->
+      </div>
+    </div>
+    <div class="col-md-4 text-center">
+      <img src="{% static 'BOUTIQUE/images/leg1.jpg' %}" alt="Image" style="width: 100%;">
+      <div class="my-4">
+        <h5> Lehenga</h5> <!-- Optional title -->
+      </div>
+    </div>
+    <div class="col-md-4 text-center">
+      <img src="{% static 'BOUTIQUE/images/gw3.jpg' %}" alt="Image" style="width: 100%;">
+      <div class="my-4">
+        <h5> gown</h5> <!-- Optional title -->
+      </div>
+    </div>
+    <div class="col-md-4 text-center">
+      <img src="{% static 'BOUTIQUE/images/gw2.jpg' %}" alt="Image" style="width: 100%;">
+      <div class="my-4">
+        <h5> gown</h5> <!-- Optional title -->
+      </div>
+    </div>
+    <div class="col-md-4 text-center">
+      <img src="{% static 'BOUTIQUE/images/gw1.jpg' %}" alt="Image" style="width: 100%;">
+      <div class="my-4">
+        <h5> gown</h5> <!-- Optional title -->
+      </div>
+    </div>
+    <div class="col-md-4 text-center">
+      <img src="{% static 'BOUTIQUE/images/sari3.jpg' %}" alt="Image" style="width: 100%;">
+      <div class="my-4">
+        <h5> Saree</h5> <!-- Optional title -->
+      </div>
+    </div>
+    <div class="col-md-4 text-center">
+      <img src="{% static 'BOUTIQUE/images/sari2.jpg' %}" alt="Image" style="width: 100%;">
+      <div class="my-4">
+        <h5> Saree</h5> <!-- Optional title -->
+      </div>
+    </div>
+    <div class="col-md-4 text-center">
+      <img src="{% static 'BOUTIQUE/images/sari1.jpg' %}" alt="Image" style="width: 100%;">
+      <div class="my-4">
+        <h5> Saree</h5> <!-- Optional title -->
+      </div>
+    </div>
+    <div class="col-md-4 text-center">
+      <img src="{% static 'BOUTIQUE/images/pic9.jpg' %}" alt="Image" style="width: 100%;">
+      <div class="my-4">
+        <h5> Blouse</h5> <!-- Optional title -->
+      </div>
+    </div>
+    <div class="col-md-4 text-center">
+      <img src="{% static 'BOUTIQUE/images/pic6.jpg' %}" alt="Image" style="width: 100%;">
+      <div class="my-4">
+        <h5> Lehenga</h5> <!-- Optional title -->
       </div>
     </div>
   </div>
