@@ -21,15 +21,17 @@
             <div class="form-check">
                 <label class="form-check-label">
                     {% if selected_product %}
-                        <input type="hidden" name="product_id" value="{{ selected_product.sno }}">
+                        <input type="hidden" name="product_sno" value="{{ selected_product.sno }}">
+                    {% else %}
+                        <p>No product selected.</p>
                     {% endif %}
                     {% if selected_product.image %}
                         <img src="{{ selected_product.image.url }}" alt="{{ selected_product.title }}" style="width: 50px;">
+                        <p>{{ selected_product.title }} - Nrs.{{ selected_product.price }}</p>
                     {% endif %}
                 </label>
             </div>
         </div>
-    
         <div class="mb-3">
             <label for="name" class="form-label">Full Name</label>
             <input type="text" class="form-control" id="name" name="name" required>
