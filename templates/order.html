@@ -1,67 +1,61 @@
 {% extends 'base.html' %}
-
-{% block orderactive %}active{% endblock orderactive %}  <!-- Highlights 'Order' link -->
+{% block orderactive %}active{% endblock orderactive %}
+{% load static %}
 
 {% block css %}
 <style>
     .product-image {
-        max-width: 50px;  /* Adjust size as necessary */
+        max-width: 100px;
         margin-right: 10px;
     }
 </style>
 {% endblock css %}
 
-{% load static %}
-
 {% block body %}
 <div class="container my-5">
     <h2 class="text-center mb-4">Place Your Order</h2>
-    
-    {% if messages %}
-    <div class="alert alert-success" role="alert">
-        {% for message in messages %}
-            {{ message }}
-        {% endfor %}
-    </div>
-    {% endif %}
-
     <form method="POST" action="{% url 'submit_order' %}">
         {% csrf_token %}
+        <div class="mb-3">
+            <h5>Selected Item</h5>
+            <div class="form-check">
+                <label class="form-check-label">
+                    {% if selected_product %}
+                        <input type="hidden" name="product_id" value="{{ selected_product.sno }}">
+                    {% endif %}
+                    {% if selected_product.image %}
+                        <img src="{{ selected_product.image.url }}" alt="{{ selected_product.title }}" style="width: 50px;">
+                    {% endif %}
+                </label>
+            </div>
+        </div>
+    
         <div class="mb-3">
             <label for="name" class="form-label">Full Name</label>
             <input type="text" class="form-control" id="name" name="name" required>
         </div>
+    
         <div class="mb-3">
             <label for="email" class="form-label">Email Address</label>
             <input type="email" class="form-control" id="email" name="email" required>
         </div>
+    
         <div class="mb-3">
             <label for="phone" class="form-label">Contact Number</label>
             <input type="tel" class="form-control" id="phone" name="phone" pattern="[0-9]{10}" required>
-            <small class="form-text text-muted">Enter a 10-digit phone number.</small>
         </div>
+    
         <div class="mb-3">
             <label for="address" class="form-label">Delivery Address</label>
             <textarea class="form-control" id="address" name="address" rows="3" required></textarea>
         </div>
-        
-        <div class="mb-3">
-            <h5>Select Product</h5>
-            {% for product in products %}
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="product_id" id="product{{ product.id }}" value="{{ product.id }}" required>
-                <label class="form-check-label" for="product{{ product.id }}">
-                    <img src="{{ product.image.url }}" alt="{{ product.title }}" class="product-image"> {{ product.title }} - Nrs.{{ product.price }}
-                </label>
-            </div>
-            {% endfor %}
-        </div>
-        
+    
         <div class="mb-3">
             <label for="quantity" class="form-label">Quantity</label>
             <input type="number" class="form-control" id="quantity" name="quantity" min="1" required>
         </div>
+    
         <button type="submit" class="btn btn-dark w-100">Place Order</button>
-    </form>
+    </form>    
 </div>
 {% endblock body %}
