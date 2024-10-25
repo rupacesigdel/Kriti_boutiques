@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.utils.html import format_html
 from BOUTIQUE.models import Boutique, Contact, Order
 from django.contrib.admin import AdminSite
-from .models import Order, Product
+from .models import Order
 from django.utils.safestring import mark_safe
 
 
@@ -19,20 +19,12 @@ class BoutiqueAdmin(admin.ModelAdmin):
     image_preview.short_description = 'Image Preview'
 
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ('sno', 'name', 'email', 'phone', 'product', 'quantity', 'order_date')
-    search_fields = ('name', 'email', 'product')
-    list_filter = ('order_date',)
-    ordering = ('-order_date',)
+    list_display = ('title', 'name', 'email', 'phone', 'ordered_at', 'quantity')
 
-    def product_image(self, obj):
-        if obj.product.image:
-            return mark_safe(f'<img src="{obj.product.image.url}" style="width: 50px; height: auto;" />')
-        return "No Image"
 
-    product_image.short_description = 'Product Image'
 
 class ContactAdmin(admin.ModelAdmin):
-    list_display = ('name', 'email', 'phone', 'time')
+    list_display = ('name', 'email', 'phone', 'desc')
     search_fields = ('name', 'email')
 
 admin.site.register(Boutique, BoutiqueAdmin)

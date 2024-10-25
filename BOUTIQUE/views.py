@@ -1,41 +1,57 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from BOUTIQUE.models import Boutique, Contact
-import math
-from .models import Boutique
 from django.contrib import messages
-from .models import Order  
-from .models import Product
+from django.urls import reverse
+from BOUTIQUE.models import Boutique, Contact
+from .models import Order, Product
+import math
 
 
 def home(request):
-    return render(request, 'index.html')
+    products = Product.objects.all()
+    return render(request, 'index.html', {'products': products})
+
 
 def boutique(request):
-    no_of_posts = 7
-    page = request.GET.get('page')
-    if page is None:
-        page = 1
-    else:
-        page = int(page)
+    no_of_posts = 1
+    page = int(request.GET.get('page', 1))
+    
     boutiques = Boutique.objects.all()
-    length = len(boutiques)
+    total_boutiques = boutiques.count()
+
     boutiques = boutiques[(page - 1) * no_of_posts: page * no_of_posts]
 
     prev = page - 1 if page > 1 else None
-    nxt = page + 1 if page < math.ceil(length / no_of_posts) else None
+    nxt = page + 1 if page < math.ceil(total_boutiques / no_of_posts) else None
 
     context = {'boutiques': boutiques, 'prev': prev, 'nxt': nxt}
-    return render(request, 'home.html', context)
+    return render(request, 'new_arrivals.html', context)
+
 
 def boutique_post(request, slug):
-    boutique = Boutique.objects.filter(slug=slug).first()
-    context = {'boutique': boutique}
-    return render(request, 'boutique_post.html', context)
+    """Displays a detailed view of a boutique post."""
+    boutique = get_object_or_404(Boutique, slug=slug)
+    return render(request, 'boutique_detail.html', {'boutique': boutique})
 
-def order_view(request):
-    products = Product.objects.all()
-    return render(request, 'order.html', {'products': products})
 
+def new_arrivals_view(request):
+    """Lists all new arrivals."""
+    new_arrivals = Boutique.objects.all()
+    return render(request, 'new_arrivals.html', {'new_arrivals': new_arrivals})
+
+
+def product_detail(request, slug):
+    product = get_object_or_404(Boutique, slug=slug)
+    return render(request, 'product_detail.html', {'product': product})
+
+
+def order_view(request, product_id=None):
+    """Displays the order form with a selected product."""
+    selected_product = get_object_or_404(Boutique, sno=product_id) if product_id else None
+
+    context = {
+        'selected_product': selected_product,
+    }
+    return render(request, 'order.html', context)
 
 def submit_order(request):
     if request.method == 'POST':
@@ -43,60 +59,47 @@ def submit_order(request):
         email = request.POST.get('email')
         phone = request.POST.get('phone')
         address = request.POST.get('address')
-        product_id = request.POST.get('product_id')
         quantity = request.POST.get('quantity')
+        product_sno = request.POST.get('product_sno')  # Get the product sno from form
 
-        if product_id:
-            product = get_object_or_404(Product, id=product_id)
+        # Fetch the product object using the sno field
+        product = get_object_or_404(Boutique, sno=product_sno)
 
-            order = Order.objects.create(
-                product=product,
-                name=name,
-                email=email,
-                phone=phone,
-                address=address,
-                quantity=quantity
-            )
+        # Create the order object
+        Order.objects.create(
+            title=product.title,  # Use the product title here
+            name=name,
+            email=email,
+            phone=phone,
+            address=address,
+            quantity=quantity,
+        )
 
-            return redirect('order_success')
-        else:
-            return redirect('order')
+        messages.success(request, 'Order placed successfully!')
+        return redirect('order')
 
     return redirect('order')
 
 
-def new_arrivals_view(request):
-    new_arrivals = Boutique.objects.all() 
-    context = {
-        'new_arrivals': new_arrivals
-    }
-    return render(request, 'new_arrivals.html', context)
 
 
-def product_detail(request, sno):
-    product = get_object_or_404(Boutique, sno=sno)
-    context = {
-        'product': product
-    }
-    return render(request, 'product_detail.html', context)
-
-    
 def search(request):
-    query = request.GET.get('q')
-    if query:
-        results = Boutique.objects.filter(title__icontains=query)
-    else:
-        results = Boutique.objects.none()
-
+    """Handles search functionality."""
+    query = request.GET.get('q', '')
+    results = Boutique.objects.filter(title__icontains=query) if query else Boutique.objects.none()
     return render(request, 'search.html', {'results': results})
 
+
 def contact(request):
+    """Handles contact form submissions."""
     if request.method == 'POST':
-        name = request.POST.get("name")
-        email = request.POST.get("email")
-        phone = request.POST.get("phone")
-        desc = request.POST.get("desc")
-        instance = Contact(name=name, email=email, phone=phone, desc=desc)
-        instance.save()
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        phone = request.POST.get('phone')
+        desc = request.POST.get('desc')
+
+        Contact.objects.create(name=name, email=email, phone=phone, desc=desc)
+        messages.success(request, 'Contact submitted successfully!')
         return redirect('contact')
+
     return render(request, 'contact.html')
