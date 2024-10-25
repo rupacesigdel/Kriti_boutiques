@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {% load static %}
-    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
           rel="stylesheet" 
@@ -15,45 +15,42 @@
   </head>
   <body style="padding-bottom: 50px;">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="{% url 'home' %}">BOUTIQUE</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
-                  data-bs-target="#navbarSupportedContent" 
-                  aria-controls="navbarSupportedContent" 
-                  aria-expanded="false" 
-                  aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link {% block homeactive %}{% endblock homeactive %}" 
-                   href="{% url 'home' %}">Dresses</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link {% block designactive %}{% endblock designactive %}" 
-                   href="{% url 'boutique' %}">Design</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link {% block orderactive %}{% endblock orderactive %}" 
-                   href="{% url 'order' %}">Order</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link {% block new_arrivalsactive %}{% endblock new_arrivalsactive %}" 
-                   href="{% url 'new_arrivals' %}">New Arrivals</a>
-              </li>              
-              <li class="nav-item">
-                <a class="nav-link {% block contactactive %}{% endblock contactactive %}" 
-                   href="{% url 'contact' %}">Contact</a>
-              </li>
-            </ul>
-            <form action="{% url 'search' %}" method="GET" class="d-flex">
-              <input type="text" name="q" id="searchQuery" class="form-control me-2" 
-                     placeholder="Search..." aria-label="Search">
-              <button type="submit" class="btn btn-outline-light">Search</button>
-            </form>
-          </div>
-        </div>
+      <a class="navbar-brand mx-1" href="{% url 'home' %}">
+        <img src="{% static 'BOUTIQUE/images/logo.png' %}" alt="Logo"  style="width: 70px">
+      </a>
+      <a class="navbar-brand" href="{% url 'home' %}">BOUTIQUE</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+              data-bs-target="#navbarSupportedContent" 
+              aria-controls="navbarSupportedContent" 
+              aria-expanded="false" 
+              aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link {% block homeactive %}{% endblock homeactive %}" 
+                href="{% url 'home' %}">Dresses</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% block new_arrivalsactive %}{% endblock new_arrivalsactive %}" 
+            href="{% url 'new_arrivals' %}">New Arrivals</a>
+          </li>              
+          <li class="nav-item">
+            <a class="nav-link {% block orderactive %}{% endblock orderactive %}" 
+                href="{% url 'order' %}">Order</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% block contactactive %}{% endblock contactactive %}" 
+            href="{% url 'contact' %}">Contact</a>
+          </li>
+        </ul>
+        <form action="{% url 'search' %}" method="GET" class="d-flex">
+          <input type="text" name="q" id="searchQuery" class="form-control me-2" 
+                  placeholder="Search..." aria-label="Search">
+          <button type="submit" class="btn btn-outline-light">Search</button>
+        </form>
+      </div>
     </nav>
 
     {% block body %}{% endblock body %}
@@ -72,7 +69,7 @@
           </div>
       </div>
   </footer>
-  
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
             integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
