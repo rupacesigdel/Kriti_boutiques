@@ -5,6 +5,18 @@
 {% block body %} 
 <div class="container">  
   <h2 class="py-3">Contact us </h2>
+  {% if messages %}
+  <table style="width: 100%; margin-bottom: 15px; border-collapse: collapse;">
+      <tr>
+        <td style="background-color: #d4edda; color: #155724; padding: 10px; border: 1px solid #c3e6cb; 
+                  border-radius: 5px; text-align: center;">
+          {% for message in messages %}
+            <strong>{{ message }}</strong>
+          {% endfor %}
+        </td>
+      </tr>
+    </table>
+  {% endif %}
   <form action="/contact/" method="POST">
     {% csrf_token %}
     <div class="from-group">
