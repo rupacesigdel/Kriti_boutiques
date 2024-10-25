@@ -20,3 +20,41 @@
     color: #f0c14b;
     transform: scale(1.2);
 }
+
+/* Default Light Mode Styles */
+body {
+    background-color: #fff;
+    color: #000;
+  }
+  
+  .navbar {
+    background-color: #f8f9fa;
+  }
+  
+  .footer {
+    background-color: #f8f9fa;
+    color: #000;
+  }
+  
+  /* Dark Mode Styles */
+  .dark-mode body {
+    background-color: #121212;
+    color: #f1f1f1;
+  }
+  
+  .dark-mode .navbar {
+    background-color: #212529;
+  }
+  
+  .dark-mode .footer {
+    background-color: #212529;
+    color: #f1f1f1;
+  }
+  body {
+    transition: background-color 0.1s, color 0.1s;
+  }
+  
+  .navbar, .footer {
+    transition: background-color 0.1s, color 0.1s;
+  }
+  

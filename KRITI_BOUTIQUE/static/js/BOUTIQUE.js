@@ -1,12 +1,21 @@
-document.addEventListener("DOMContentLoaded", function(event) {
-    console.log("This is design.js");
+const themeToggle = document.getElementById('theme-toggle');
+const currentTheme = localStorage.getItem('theme');
 
-    let sc = document.createElement('script');
-    sc.setAttribute('src', 'https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js');
+if (currentTheme === 'dark') {
+document.documentElement.classList.add('dark-mode');
+themeToggle.textContent = '☀️ Light Mode';
+}
 
-    document.head.appendChild(sc);
+themeToggle.addEventListener('click', () => {
+document.documentElement.classList.toggle('dark-mode');
 
-    sc.onload = () => {
-        CKEDITOR.replace('id_content');
-    };
+let theme = 'light';
+if (document.documentElement.classList.contains('dark-mode')) {
+    theme = 'dark';
+    themeToggle.textContent = '☀️ Light Mode';
+} else {
+    themeToggle.textContent = '🌙 Dark Mode';
+}
+
+localStorage.setItem('theme', theme);
 });
