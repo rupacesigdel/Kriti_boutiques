@@ -1,37 +1,8 @@
 {% extends "base.html" %}
-{% block designactive %}active{% endblock designactive %}
+{% block new_arrivalsactive %}active{% endblock new_arrivalsactive %}
 {% block css %}
 {% endblock css %}
 
 {% block body %}
-<div class="container">
-  {% for boutique in boutiques %}
-    <div class="my-4">
-      <div class="my-2">
-        <h3 class="text-dark">
-          <a href="/boutique_post/{{ boutique.slug }}" class="text-dark">{{ boutique.title }}</a>
-        </h3>
-        {{ boutique_post.content|slice:245 }}...
-      </div>
-      <a href="/boutique_post/{{ boutique.slug }}" class="text-dark">
-        <button class="btn btn-outline-primary">Read More...</button>
-      </a>
-    </div>
-  {% endfor %}
 
-  <div class="my-3">
-    {% if prev %}
-      <button class="btn btn-success">
-        <a class="text-light" href="/boutique/?page={{ prev }}">&laquo; Previous</a>
-      </button>
-    {% endif %}
-    <div class="button-container">
-      {% if nxt %}
-        <button class="btn btn-success">
-          <a class="text-light" href="/boutique/?page={{ nxt }}">Next &raquo;</a>
-        </button>
-      {% endif %}
-    </div>
-  </div>
-</div>
 {% endblock body %}

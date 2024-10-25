@@ -2,27 +2,59 @@
 
 {% block new_arrivalsactive %}active{% endblock new_arrivalsactive %}
 
-{% block css %}{% endblock css %}
+{% block css %}
+<style>
+    .product-card img {
+        width: 100%; /* Ensures the image takes the full width */
+        height: 200px; /* Fixed height for consistent display */
+        object-fit: cover; /* Ensures the image covers the container */
+        border-radius: 10px; /* Rounded corners */
+        transition: transform 0.3s ease; /* Animation on hover */
+    }
+
+    .product-card img:hover {
+        transform: scale(1.05); /* Slight zoom on hover */
+    }
+</style>
+{% endblock css %}
 
 {% load static %}
 
 {% block body %}
 <div class="container my-5">
     <h2 class="text-center mb-4">New Arrivals</h2>
+
     <div class="row">
         {% for product in new_arrivals %}
-        <li>
-            <h2>{{ product.title }}</h2>
-            <p>{{ product.short_desc }}</p>
-            <p><strong>Price:</strong> ${{ product.price }}</p>
-            {% if product.image %}
-                <img src="{{ product.image.url }}" alt="{{ product.title }}" style="width:200px;">
-            {% endif %}
-            <a href="{% url 'product_detail' product.sno %}">View Details</a>
-        </li>
-    {% empty %}
-        <li>No new arrivals available at the moment.</li>
-    {% endfor %}   
+        <div class="col-md-3 mb-0">
+            <div class="product-card text-center p-2 border rounded shadow-sm">
+                {% if product.image %}
+                <a href="{% url 'product_detail' product.slug %}">
+                <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.title }}">
+                </a>
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.title }}</h5>
+                    <p class="card-text">{{ product.short_desc }}</p>
+                    <p class="card-text">
+                        <strong>Price:</strong> ${{ product.price }}
+                    </p>
+                </div>
+                <div class="card-footer bg-transparent border-0">
+                    <a href="{% url 'product_detail' product.slug %}" class="btn btn-outline-primary">Detail...</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="d-flex justify-content-between my-3">
+        {% if prev %}
+        <a href="/new_arrivals/?page={{ prev }}" class="btn btn-success">&laquo; Previous</a>
+        {% endif %}
+        
+        {% if nxt %}
+        <a href="/new_arrivals/?page={{ nxt }}" class="btn btn-success">Next &raquo;</a>
+        {% endif %}
     </div>
 </div>
 {% endblock body %}
