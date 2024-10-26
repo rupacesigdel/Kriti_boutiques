@@ -52,7 +52,6 @@ def product_detail(request, slug):
 @login_required
 @csrf_exempt
 def order_view(request, product_id=None):
-    """Displays the order form with a selected product."""
     selected_product = get_object_or_404(Boutique, sno=product_id) if product_id else None
 
     context = {
@@ -67,14 +66,16 @@ def submit_order(request):
         phone = request.POST.get('phone')
         address = request.POST.get('address')
         quantity = request.POST.get('quantity')
-        product_sno = request.POST.get('product_sno')  # Get the product sno from form
+        product_sno = request.POST.get('product_sno')
 
-        # Fetch the product object using the sno field
+        if not product_sno:
+            messages.error(request, 'Please select a product before placing the order.')
+            return redirect('order')  
+        
         product = get_object_or_404(Boutique, sno=product_sno)
 
-        # Create the order object
         Order.objects.create(
-            title=product.title,  # Use the product title here
+            title=product.title,
             name=name,
             email=email,
             phone=phone,
@@ -92,7 +93,6 @@ def submit_order(request):
 @login_required
 @csrf_exempt
 def search(request):
-    """Handles search functionality."""
     query = request.GET.get('q', '')
     results = Boutique.objects.filter(title__icontains=query) if query else Boutique.objects.none()
     return render(request, 'search.html', {'results': results})
@@ -100,7 +100,6 @@ def search(request):
 @login_required
 @csrf_exempt
 def contact(request):
-    """Handles contact form submissions."""
     if request.method == 'POST':
         name = request.POST.get('name')
         email = request.POST.get('email')
