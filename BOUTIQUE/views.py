@@ -10,14 +10,12 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.views.decorators.csrf import csrf_exempt
 
-@login_required
-@csrf_exempt
+
 def home(request):
     products = Product.objects.all()
     return render(request, 'index.html', {'products': products})
 
-@login_required
-@csrf_exempt
+
 def boutique(request):
     no_of_posts = 1
     page = int(request.GET.get('page', 1))
