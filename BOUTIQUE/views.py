@@ -4,13 +4,20 @@ from django.urls import reverse
 from BOUTIQUE.models import Boutique, Contact
 from .models import Order, Product
 import math
+import logging, requests
+from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
+from django.views.decorators.csrf import csrf_exempt
 
-
+@login_required
+@csrf_exempt
 def home(request):
     products = Product.objects.all()
     return render(request, 'index.html', {'products': products})
 
-
+@login_required
+@csrf_exempt
 def boutique(request):
     no_of_posts = 1
     page = int(request.GET.get('page', 1))
@@ -32,7 +39,8 @@ def boutique_post(request, slug):
     boutique = get_object_or_404(Boutique, slug=slug)
     return render(request, 'boutique_detail.html', {'boutique': boutique})
 
-
+@login_required
+@csrf_exempt
 def new_arrivals_view(request):
     """Lists all new arrivals."""
     new_arrivals = Boutique.objects.all()
@@ -43,7 +51,8 @@ def product_detail(request, slug):
     product = get_object_or_404(Boutique, slug=slug)
     return render(request, 'product_detail.html', {'product': product})
 
-
+@login_required
+@csrf_exempt
 def order_view(request, product_id=None):
     """Displays the order form with a selected product."""
     selected_product = get_object_or_404(Boutique, sno=product_id) if product_id else None
@@ -82,14 +91,16 @@ def submit_order(request):
 
 
 
-
+@login_required
+@csrf_exempt
 def search(request):
     """Handles search functionality."""
     query = request.GET.get('q', '')
     results = Boutique.objects.filter(title__icontains=query) if query else Boutique.objects.none()
     return render(request, 'search.html', {'results': results})
 
-
+@login_required
+@csrf_exempt
 def contact(request):
     """Handles contact form submissions."""
     if request.method == 'POST':
@@ -103,3 +114,18 @@ def contact(request):
         return redirect('contact')
 
     return render(request, 'contact.html')
+
+
+def signup(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')
+    else:
+        form = UserCreationForm()
+    return render(request, 'signup.html', {'form': form})
+
+def logout_view(request):
+    logout(request)
+    return redirect('login')

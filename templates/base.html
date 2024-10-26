@@ -53,6 +53,14 @@
                   placeholder="Search..." aria-label="Search">
           <button type="submit" class="btn btn-outline-light">Search</button>
         </form>
+        <nav>
+          {% if user.is_authenticated %}
+              <a class="btn btn-primary my-1 mx-1" href="{% url 'logout' %}">Logout</a>
+          {% else %}
+              <a class="btn btn-primary my-1 mx-1" href="{% url 'login' %}">Login</a>
+              <a class="btn btn-primary my-1 mx-2" href="{% url 'signup' %}">Signup</a>
+          {% endif %}
+        </nav>
       </div>
     </nav>
 
