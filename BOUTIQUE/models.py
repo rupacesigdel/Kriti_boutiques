@@ -43,4 +43,3 @@ class Contact(models.Model):
     phone = models.CharField(max_length=12)
     desc = models.TextField()
     time = models.DateTimeField(auto_now_add=True)
-
