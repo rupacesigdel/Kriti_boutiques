@@ -5,8 +5,9 @@
     "config":{"maxLambdaSize":"15mb", "runtime":"python3.12.6"}
     }],
     "routes": [
-        { "src": "/", "dest": "/index.html" },
-        {"dest": "KRITI_BOUTIQUE/wagi.py"}
+        {
+        "src": "/(.*)",
+        "dest": "KRITI_BOUTIQUE/wagi.py"
+        }
     ]
-
 }
