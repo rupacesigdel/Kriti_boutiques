@@ -1,18 +1,16 @@
 {
+    "version": 2,
     "builds": [
-        {
-            "src": "KRITI_BOUTIQUE/wsgi.py",
-            "use": "@vercel/python",
-            "config": {
-                "maxLambdaSize": "15mb",
-                "runtime": "python3.12.6"
-            }
-        }
+      {
+        "src": "KRITI_BOUTIQUE/wsgi.py",
+        "use": "@vercel/python"
+      }
     ],
     "routes": [
-        {
-            "src": "/(.*)",
-            "dest": "KRITI_BOUTIQUE/wsgi.py"
-        }
+      {
+        "src": "/(.*)",
+        "dest": "KRITI_BOUTIQUE/wsgi.py"
+      }
     ]
-}
+  }
+  
