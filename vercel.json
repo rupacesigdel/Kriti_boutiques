@@ -1,18 +1,13 @@
 {
-  "builds": [
-    {
-      "src": "KRITI_BOUTIQUE/wsgi.py",
-      "use": "@vercel/python"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "KRITI_BOUTIQUE/wsgi.py"
-    }
-  ],
-  "env": {
-    "DJANGO_SETTINGS_MODULE": "KRITI_BOUTIQUE.settings.production"
-  },
-  "buildCommand": "python manage.py collectstatic --noinput && pip install -r requirements.txt"
+    "builds":[{
+        "src":"KRITI_BOUTIQUE/wsgi.py",
+        "use": "@vercel/python",
+        "config":{"maxlambdaSize":"15mb","runtime":"python3.12.6"}
+    }],
+    "routes":[
+        {
+            "src":"/(.*)",
+            "dest":"KRITI_BOUTIQUE/wsgi.py"
+        }
+    ]
 }

@@ -39,3 +39,6 @@ Welcome to the Kriti Boutique E-commerce Website project! This is a Django-based
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+rupeshsigdel
+rupesh@123
