@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: birthday-wish-project
+    name: KRITI_BOUTIQUE
     env: python
     buildCommand: "pip install -r requirements.txt"
     startCommand: "gunicorn KRITI_BOUTIQUE.wsgi:application"
