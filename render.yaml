@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: birthday-wish-project
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn KRITI_BOUTIQUE.wsgi:application"
+    envVars:
+      - key: DJANGO_SECRET_KEY
+        value: "your-django-secret-key"
+      - key: DEBUG
+        value: "false"
+      - key: ALLOWED_HOSTS
+        value: "yourdomain.com,www.yourdomain.com"
+    plan: free
+    regions:
+      - oregon
+    autoDeploy: true

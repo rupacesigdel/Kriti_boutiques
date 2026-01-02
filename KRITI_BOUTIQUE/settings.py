@@ -26,7 +26,8 @@ SECRET_KEY = 'django-insecure-%2s3)m1v_t%@oc3q8=lfqw&#*%me$vonatw9%v=qezag2tbnzr
 
 DEBUG = True
 ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['KRITI_BOUTIQUE-lynn.onrender.com', 'localhost']
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 
 # Application definition
