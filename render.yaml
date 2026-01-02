@@ -13,5 +13,5 @@ services:
         value: "yourdomain.com,www.yourdomain.com"
     plan: free
     regions:
-      - oregon
+      - virginia
     autoDeploy: true
