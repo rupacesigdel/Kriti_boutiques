@@ -1,8 +1,10 @@
-﻿Django==5.0.6
+
+Django>=4.2.11,<5.0
 gunicorn
 whitenoise
 psycopg2-binary
+django-allauth[socialaccount]
 dj-database-url
-django-allauth
 requests
 PyJWT
+cryptography
