@@ -1,5 +1,5 @@
 
-Django>=4.2.11,<5.0
+Django>=5.0
 gunicorn
 whitenoise
 psycopg2-binary
@@ -8,3 +8,4 @@ dj-database-url
 requests
 PyJWT
 cryptography
+
