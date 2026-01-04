@@ -23,10 +23,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'django-insecure-%2s3)m1v_t%@oc3q8=lfqw&#*%me$vonatw9%v=qezag2tbnzr'
 
 # SECURITY WARNING: don't run with debug turned on in production!
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 
-DEBUG = True
-ALLOWED_HOSTS = ['KRITI_BOUTIQUE-lynn.onrender.com', 'localhost']
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+DEBUG = os.getenv("DEBUG") == "true"
+
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "").split(",")
 
 
 # Application definition
