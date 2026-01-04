@@ -26,7 +26,7 @@ SECRET_KEY = os.getenv(
 )
 
 
-DEBUG=True
+DEBUG = True
 
 ALLOWED_HOSTS = [
     "kriti-boutique.onrender.com",
