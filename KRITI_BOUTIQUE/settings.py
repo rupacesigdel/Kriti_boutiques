@@ -20,15 +20,19 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-%2s3)m1v_t%@oc3q8=lfqw&#*%me$vonatw9%v=qezag2tbnzr'
+SECRET_KEY = os.getenv(
+    "DJANGO_SECRET_KEY",
+    "django-insecure-dev-only"
+)
 
-# SECURITY WARNING: don't run with debug turned on in production!
-SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 
-DEBUG = os.getenv("DEBUG") == "true"
+DEBUG=true
 
-ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "").split(",")
-
+ALLOWED_HOSTS = [
+    "kriti-boutique.onrender.com",
+    "localhost",
+    "127.0.0.1",
+]
 
 # Application definition
 
